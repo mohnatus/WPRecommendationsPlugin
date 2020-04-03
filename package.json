@@ -1,0 +1,21 @@
+{
+  "name": "recommendations",
+  "version": "1.0.0",
+  "description": "WordPress Recommendations plugin",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:js": "parcel build src/main.js --out-dir . --no-cache",
+    "build:css": "parcel build src/main.scss --out-dir . --no-cache --no-source-maps",
+    "build": "npm run build:js && npm run build:css"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "autoprefixer": "^9.7.5",
+    "parcel-bundler": "^1.12.4",
+    "postcss-modules": "^1.5.0",
+    "sass": "^1.26.3"
+  }
+}

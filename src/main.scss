@@ -1,0 +1,35 @@
+$gap: 10px;
+$controlHeight: 30px;
+
+.recommendations {
+  &-group {
+    margin-top: $gap;
+    margin-bottom: $gap;
+    margin-left: -1 * $gap / 2;
+    margin-right: -1 * $gap / 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  &-field {
+    margin-left: $gap / 2;
+    margin-right: $gap / 2;
+    margin-bottom: $gap;
+
+    input[type="text"] {
+      display: block;
+      width: 250px;
+      max-width: 100%;
+      height: $controlHeight;
+    }
+
+    button {
+      height: $controlHeight;
+    }
+  }
+  &-checkbox {
+    input, label {
+      vertical-align: baseline;
+    }
+  }
+}
