@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:js": "parcel build src/main.js --out-dir . --no-cache",
-    "build:css": "parcel build src/main.scss --out-dir . --no-cache --no-source-maps",
+    "build:js": "parcel build src/main.js --out-dir dist --no-cache",
+    "build:css": "parcel build src/main.scss --out-dir dist --no-cache --no-source-maps",
     "build": "npm run build:js && npm run build:css"
   },
   "author": "",

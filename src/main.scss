@@ -2,6 +2,16 @@ $gap: 10px;
 $controlHeight: 30px;
 
 .recommendations {
+  section {
+    margin: 15px 0;
+  }
+  &-block {
+    margin: 15px 0;
+    &__message {
+      opacity: 0.6;
+      font-size: 0.9em;
+    }
+  }
   &-group {
     margin-top: $gap;
     margin-bottom: $gap;
@@ -27,9 +37,23 @@ $controlHeight: 30px;
       height: $controlHeight;
     }
   }
-  &-checkbox {
-    input, label {
-      vertical-align: baseline;
+  &-tag {
+    input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      margin: -1;
+      opacity: 0;
+      visibility: hidden;
+    }
+    span {
+      opacity: 0.5;
+    }
+    input:checked + span {
+      opacity: 1;
+      font-weight: bold;
     }
   }
 }
