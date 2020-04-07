@@ -3,8 +3,13 @@
 add_action('wp_head', function() {
   if (!is_singular()) return;
   global $post;
+  if (!get_post_meta($post->ID, 'recommendations_visible')) {
+    update_option('recommendations_style', 0);
+    return;
+  }
   $css = get_option('recommendations_custom_css_option');
   echo "<style id='recommendations-custom'>$css</style>";
+  update_option('recommendations_style', 1);
 });
 
 
@@ -93,6 +98,11 @@ add_shortcode('recommendations', function($attrs) {
   $postId = $attrs['id'];
   if (!$postId) return '';
 
+  $css = '';
+  if (!get_option('recommendations_style')) {
+    $css = "<style id='recommendations-custom'>".get_option('recommendations_custom_css_option')."</style>";
+  }
+
   $post = get_post($postId);
-  return recommendations_create_block($post->post_content, $postId);
+  return $css.recommendations_create_block($post->post_content, $postId);
 });
