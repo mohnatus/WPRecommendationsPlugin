@@ -3,7 +3,6 @@
 add_action('wp_head', function() {
   if (!is_singular()) return;
   global $post;
-  if (!get_post_meta($post->ID, 'recommendations_visible', true)) return;
   $css = get_option('recommendations_custom_css_option');
   echo "<style id='recommendations-custom'>$css</style>";
 });
@@ -60,7 +59,7 @@ function recommendations_create_block($content, $postId) {
   }
 
   /** If no recommendations */
-  if (!$recommendations || count($recommendations) == 0) return $content;
+  if (!$recommendations || count($recommendations) == 0) return '';
 
   /** Renders block */
   $prefix = $options['css_prefix'];
