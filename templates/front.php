@@ -12,6 +12,10 @@ add_action('wp_head', function() {
 add_filter('the_content', 'recommendations_view');
 
 function recommendations_view($content) {
+  if (get_option('recommendations_disable')) {
+    return $content;
+  }
+
   global $post;
   $postId = $post->ID;
 
@@ -19,6 +23,12 @@ function recommendations_view($content) {
   $isRecommendationsVisible = get_post_meta($postId, 'recommendations_visible', true);
   if (!$isRecommendationsVisible) return $content;
 
+  $recommendationsBlock = recommendations_create_block($content, $postId);
+
+  return $content.$recommendationsBlock;
+}
+
+function recommendations_create_block($content, $postId) {
   $options = get_option('recommendations_options');
 
   /** Sets them limit count */
@@ -77,6 +87,13 @@ function recommendations_view($content) {
 
   $html .= "</ul>";
   $html .= "</section>";
-
-  return $content.$html;
+  return $html;
 }
+
+add_shortcode('recommendations', function($attrs) {
+  $postId = $attrs['id'];
+  if (!$postId) return '';
+
+  $post = get_post($postId);
+  return recommendations_create_block($post->post_content, $postId);
+});

@@ -27,6 +27,7 @@ function recommendations_settings_page() {
 add_action('admin_init', function() {
   register_setting('recommendations_settings_group', 'recommendations_custom_css_option', 'strip_tags');
   register_setting('recommendations_settings_group', 'recommendations_options', 'recommendations_sanitize');
+  register_setting('recommendations_settings_group', 'recommendations_disable', 'intval');
 
   if (!get_option('recommendations_options')) {
     update_option('recommendations_options', [
@@ -38,6 +39,8 @@ add_action('admin_init', function() {
   }
 
   add_settings_section('main_settings', '', '', 'primer_page');
+
+  add_settings_field('recommendations_disable', __('Disable recommendations (only shortcode)', 'recommendationsl10n'), 'recommendations_disable_template', 'primer_page', 'main_settings');
 
   add_settings_field('recommendations_hide_title', __('Hide block title', 'recommendationsl10n'), 'recommendations_hide_title_template', 'primer_page', 'main_settings');
   add_settings_field('recommendations_default_title', __('Default title', 'recommendationsl10n'), 'recommendations_default_title_template', 'primer_page', 'main_settings');
@@ -60,6 +63,13 @@ function recommendations_hide_title_template() {
   else $value = 0;
   ?>
     <input type="checkbox" name="recommendations_options[hide_title]" value="1" <?php checked(1, $value) ?> >
+  <?php
+}
+
+function recommendations_disable_template() {
+  $value = get_option('recommendations_disable');
+  ?>
+    <input type="checkbox" name="recommendations_disable" value="1" <?php checked(1, $value) ?> >
   <?php
 }
 
